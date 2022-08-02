@@ -25,7 +25,7 @@ sleep(10)
 pyautogui.click(x=1958, y=178)
 sleep(2)
 # escrever o destinatario
-pyautogui.write('mpiutrap@gmail.com')
+pyautogui.write('exemplo@gmail.com')
 pyautogui.press('enter')
 sleep(1)
 # escrever o assunto
