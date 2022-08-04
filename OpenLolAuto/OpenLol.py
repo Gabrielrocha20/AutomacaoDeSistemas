@@ -26,7 +26,7 @@ class OpenLol:
     # sleep(15)
 
     def login_game(self, time=0):
-
+        sleep(0.5)
         pyperclip.copy(self.login)
         self.pg.hotkey('ctrl', 'v')
         self.pg.press('tab')
@@ -36,82 +36,101 @@ class OpenLol:
         self.pg.press('enter')
 
         sleep(time)
-    #sleep(30)
+
+    # sleep(30)
 
     def in_game(self):
-        self.pg.click(x=433, y=194)
-        sleep(2)
-        self.pg.click(x=362, y=706)
-        sleep(2)
-        self.pg.click(x=848, y=838)
-        sleep(2)
-        self.pg.click(x=928, y=598)
-        sleep(2)
+        while True:
+            btn_jogar = self.pg.locateOnScreen("jogar.png", confidence=0.5)
+            if btn_jogar:
+                self.pg.click(btn_jogar)
+                sleep(2)
+
+                btn_alternativa = self.pg.locateOnScreen("alternativa.PNG", confidence=0.9)
+                self.pg.click(btn_alternativa)
+                sleep(2)
+
+                btn_confirma_sala = self.pg.locateOnScreen("ConfirmarSala.PNG", confidence=0.5)
+                self.pg.click(btn_confirma_sala)
+                sleep(2)
+
+                break
+            else:
+                pass
 
     def top_lane(self):
-        if self.first_lane is False:
-            self.pg.click(x=976, y=846)
-            sleep(2)
-            self.pg.click(x=834, y=785)
-            self.first_lane = True
-            return self.first_lane
+        while True:
+            btn_escolher_lane = self.pg.locateOnScreen("escolher_lane.PNG", confidence=0.9)
+            if btn_escolher_lane:
+                self.pg.click(btn_escolher_lane)
+                btn_top_lane = self.pg.locateOnScreen("top_lane.PNG", confidence=0.9)
+                self.pg.click(btn_top_lane)
+                break
+            else:
+                pass
 
-        self.pg.click(x=1014, y=843)
-        sleep(2)
-        self.pg.click(x=878, y=792)
         return
 
     def jungle_lane(self):
-        if self.first_lane is False:
-            self.pg.click(x=976, y=846)
-            sleep(2)
-            self.pg.click(x=881, y=787)
-            self.first_lane = True
-            return self.first_lane
+        while True:
+            btn_escolher_lane = self.pg.locateOnScreen("escolher_lane.PNG", confidence=0.9)
+            if btn_escolher_lane:
+                self.pg.click(btn_escolher_lane)
+                btn_jungle_lane = self.pg.locateOnScreen("jungle_lane.PNG", confidence=0.9)
+                self.pg.click(btn_jungle_lane)
+                break
+            else:
+                pass
 
-        self.pg.click(x=1014, y=843)
-        sleep(2)
-        self.pg.click(x=924, y=775)
         return
 
     def mid_lane(self):
-        if self.first_lane is False:
-            self.pg.click(x=976, y=846)
-            sleep(2)
-            self.pg.click(x=943, y=778)
-            self.first_lane = True
-            return self.first_lane
+        while True:
+            btn_escolher_lane = self.pg.locateOnScreen("escolher_lane.PNG", confidence=0.9)
+            if btn_escolher_lane:
+                self.pg.click(btn_escolher_lane)
+                btn_mid_lane = self.pg.locateOnScreen("mid_lane.PNG", confidence=0.9)
+                self.pg.click(btn_mid_lane)
+                break
+            else:
+                pass
 
-        self.pg.click(x=1014, y=843)
-        sleep(2)
-        self.pg.click(x=978, y=779)
         return
 
     def adc_lane(self):
-        if self.first_lane is False:
-            self.pg.click(x=976, y=846)
-            sleep(2)
-            self.pg.click(x=986, y=780)
-            self.first_lane = True
-            return self.first_lane
-
-        self.pg.click(x=1014, y=843)
-        sleep(2)
-        self.pg.click(x=1039, y=780)
+        while True:
+            btn_escolher_lane = self.pg.locateOnScreen("escolher_lane.PNG", confidence=0.9)
+            if btn_escolher_lane:
+                self.pg.click(btn_escolher_lane)
+                btn_adc_lane = self.pg.locateOnScreen("adc_lane.PNG", confidence=0.9)
+                self.pg.click(btn_adc_lane)
+                break
+            else:
+                pass
+     
         return
 
     def sup_lane(self):
-        if self.first_lane is False:
-            self.pg.click(x=976, y=846)
-            sleep(2)
-            self.pg.click(x=1065, y=778)
-            self.first_lane = True
-            return self.first_lane
+        while True:
+            btn_escolher_lane = self.pg.locateOnScreen("escolher_lane.PNG", confidence=0.9)
+            if btn_escolher_lane:
+                self.pg.click(btn_escolher_lane)
+                btn_sup_lane = self.pg.locateOnScreen("sup_lane.PNG", confidence=0.9)
+                self.pg.click(btn_sup_lane)
+                break
+            else:
+                pass
 
-        self.pg.click(x=1014, y=843)
-        sleep(2)
-        self.pg.click(x=1097, y=780)
         return
+
+    def start_game(self):
+        while True:
+            btn_start = self.pg.locateOnScreen("encontrar_partida.PNG", confidence=0.9)
+            if btn_start:
+                self.pg.click(btn_start)
+                break
+            else:
+                pass
 
     def position(self):
 
@@ -159,13 +178,20 @@ if __name__ == '__main__':
     dados.read_file()
 
     abrir_jogo = OpenLol(dados.login_registred, dados.pass_registred)
-    abrir_jogo.open_app(10)
-    abrir_jogo.login_game(30)
+    # abrir_jogo.open_app(10)
+    # abrir_jogo.login_game(30)
     abrir_jogo.in_game()
-    abrir_jogo.jungle_lane()
     abrir_jogo.top_lane()
-    sleep(2)
-    abrir_jogo.position()
+    abrir_jogo.mid_lane()
+    abrir_jogo.start_game()
+    # abrir_jogo.adc_lane()
+    # sleep(2)
+    # abrir_jogo.position()
+
+
+
+
+
 
 
 
